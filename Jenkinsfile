@@ -41,7 +41,7 @@ node {
         }
     }
     catch(ex) {
-        echo ex
+        echo ex.toString()
     }
 }
 
