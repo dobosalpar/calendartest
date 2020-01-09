@@ -15,6 +15,11 @@ node {
                 sh 'npm run lighthouse'
 
                 def lightHouseReport = readJSON file: 'lighthouse-report.json'
+				assert lightHouseReport['key'] == 'value'
+				assert lightHouseReport.key == 'value'
+
+				echo lightHouseReport
+
                 def reportCategories = lightHouseReport['categories']
                 def minPerformanceRequirement = 0.9
 
