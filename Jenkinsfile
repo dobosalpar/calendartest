@@ -1,4 +1,5 @@
 node {
+	checkout scm
     def gitDocker = docker.build("custom-withgit:0.5")
     try {
         gitDocker.inside {
