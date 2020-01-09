@@ -41,7 +41,7 @@ node {
         }
     }
     catch(ex) {
-        sendStatus("FAILED")
+        echo ex
     }
 }
 
