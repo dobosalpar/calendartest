@@ -30,9 +30,16 @@ node {
 
                 if (performanceScore < minPerformanceRequirement || accessibilityScore < minPerformanceRequirement || bestPracticesScore < minPerformanceRequirement || seoScore < minPerformanceRequirement) {
                     throw new Exception('Performance test failed!')
-                } else {
-                    echo 'ALL GOOD'
                 }
+
+                publishHTML (target: [
+                  allowMissing: false,
+                  alwaysLinkToLastBuild: false,
+                  keepAll: true,
+                  reportDir: '.',
+                  reportFiles: 'lighthouse-report.html',
+                  reportName: "Lighthouse"
+                ])
             }
 
             stage("Notify success build") {
