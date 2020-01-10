@@ -3,6 +3,7 @@ import groovy.json.JsonSlurperClassic
 node {
 	checkout scm
     def gitDocker = docker.build("custom-withgit:0.5")
+    def branch = env.BRANCH_NAME
     try {
         gitDocker.inside {
 
