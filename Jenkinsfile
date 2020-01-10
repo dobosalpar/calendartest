@@ -21,7 +21,7 @@ node {
 
                 echo 'THIS IS SPARTA'
 
-                def minPerformanceRequirement = 0.9
+                def minPerformanceRequirement = 0.1
 
                 def accessibilityScore = reportCategories['accessibility']['score']
                 def performanceScore = reportCategories['performance']['score']
