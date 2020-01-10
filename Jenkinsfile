@@ -19,8 +19,6 @@ node {
 				def lightHouseReport = readJSON(file:'lighthouse-report.json')
                 def reportCategories = lightHouseReport['categories']
 
-                echo 'THIS IS SPARTA'
-
                 def minPerformanceRequirement = 0.1
 
                 def accessibilityScore = reportCategories['accessibility']['score']
