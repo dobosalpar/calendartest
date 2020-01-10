@@ -13,11 +13,11 @@ node {
             }
 
             stage('Performance Test') {
-
-                if (branch == 'master') {
+                echo 'STARTED'
+                if (branch != 'master') {
                     return
                 }
-
+                echo 'I AM MASTER'
                 sh 'node lightHouseTestServer &'
                 sh 'npm run lighthouse'
 
