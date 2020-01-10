@@ -14,7 +14,7 @@ node {
 
             stage('Performance Test') {
 
-                if branch == 'xxx' {
+                if (branch == 'xxx') {
                     return
                 }
 
