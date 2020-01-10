@@ -20,7 +20,7 @@ node {
 				// assert lightHouseReport['key'] == 'value'
 				// assert lightHouseReport.key == 'value'
 
-				def lightHouseReport = readFile(file:'lighthouse-report.json')
+				def lightHouseReport = readJSON(file:'lighthouse-report.json')
                 echo lightHouseReport
 
                 if (lightHouseReport.getClass() == String.class) {
