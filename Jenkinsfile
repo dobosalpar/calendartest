@@ -14,8 +14,8 @@ node {
 
             stage('Performance Test') {
 
-                when {
-                    branch 'xxx'
+                if branch == 'xxx' {
+                    return
                 }
 
                 sh 'node lightHouseTestServer &'
