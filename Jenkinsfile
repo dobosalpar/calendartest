@@ -21,7 +21,6 @@ node {
 				// assert lightHouseReport.key == 'value'
 
 				def lightHouseReport = readJSON(file:'lighthouse-report.json')
-                echo lightHouseReport
 
 				echo 'THIS IS SPARTA'
 
