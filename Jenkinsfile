@@ -21,23 +21,18 @@ node {
 
                 echo 'THIS IS SPARTA'
 
+                def minPerformanceRequirement = 0.9
+
                 def accessibilityScore = reportCategories['accessibility']['score']
-                echo accessibilityScore
+                def performanceScore = reportCategories['performance']['score']
+                def bestPracticesScore = reportCategories['best-practices']['score']
+                def seoScore = reportCategories['seo']['score']
 
-                // def reportCategories = lightHouseReportJson['categories']
-                // def minPerformanceRequirement = 0.9
-
-                // def performanceScore = reportCategories['performance']['score']
-
-				// echo performanceScore
-
-                // def accessibilityScore = reportCategories['accessibility']['score']
-                // def bestPracticesScore = reportCategories['best-practices']['score']
-                // def seoScore = reportCategories['seo']['score']
-
-                // if (performanceScore < minPerformanceRequirement || accessibilityScore < minPerformanceRequirement || bestPracticesScore < minPerformanceRequirement || seoScore < minPerformanceRequirement) {
-                //     throw new Exception('Performance test failed!')
-                // }
+                if (performanceScore < minPerformanceRequirement || accessibilityScore < minPerformanceRequirement || bestPracticesScore < minPerformanceRequirement || seoScore < minPerformanceRequirement) {
+                    throw new Exception('Performance test failed!')
+                } else {
+                    echo 'ALL GOOD'
+                }
             }
 
             stage("Notify success build") {
