@@ -23,10 +23,15 @@ node {
 				def lightHouseReport = readJSON(file:'lighthouse-report.json')
                 echo lightHouseReport
 
-                if (lightHouseReport.getClass() == String.class) {
-                    echo 'THIS IS SPARTA'
-                }
-				// def lightHouseReportJson = new JsonSlurperClassic().parseText(lightHouseReport)
+				echo 'THIS IS SPARTA'
+
+                def reportCategories = lightHouseReport['categories']
+                echo reportCategories
+
+                echo 'THIS IS SPARTA'
+
+                def accessibilityScore = reportCategories['accessibility']['score']
+                echo accessibilityScore
 
                 // def reportCategories = lightHouseReportJson['categories']
                 // def minPerformanceRequirement = 0.9
