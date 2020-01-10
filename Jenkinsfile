@@ -23,7 +23,7 @@ node {
 				def lightHouseReport = readFile(file:'lighthouse-report.json')
 				def lightHouseReportJson = new JsonSlurperClassic().parseText(lightHouseReport)
 
-				echo lightHouseReportJson
+				echo lightHouseReport
 
                 def reportCategories = lightHouseReportJson['categories']
                 def minPerformanceRequirement = 0.9
