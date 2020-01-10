@@ -16,16 +16,8 @@ node {
                 sh 'node lightHouseTestServer &'
                 sh 'npm run lighthouse'
 
-                // def lightHouseReport = readJSON file: 'lighthouse-report.json'
-				// assert lightHouseReport['key'] == 'value'
-				// assert lightHouseReport.key == 'value'
-
 				def lightHouseReport = readJSON(file:'lighthouse-report.json')
-
-				echo 'THIS IS SPARTA'
-
                 def reportCategories = lightHouseReport['categories']
-                echo reportCategories
 
                 echo 'THIS IS SPARTA'
 
