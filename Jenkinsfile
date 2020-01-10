@@ -16,7 +16,7 @@ node {
                 sh 'node lightHouseTestServer &'
                 sh 'npm run lighthouse'
 
-				def lightHouseReport = readJSON(file:'lighthouse-report.json')
+				def lightHouseReport = readJSON(file:'lighthouse.report.json')
                 def reportCategories = lightHouseReport['categories']
 
                 def minPerformanceRequirement = 0.1
@@ -35,7 +35,7 @@ node {
                   alwaysLinkToLastBuild: false,
                   keepAll: true,
                   reportDir: '.',
-                  reportFiles: 'lighthouse-report.html',
+                  reportFiles: 'lighthouse.report.html',
                   reportName: "Lighthouse"
                 ])
             }
