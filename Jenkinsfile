@@ -1,8 +1,5 @@
 import groovy.json.JsonSlurperClassic
 
-
-JAVA_ARGS="-Dhudson.model.DirectoryBrowserSupport.CSP=\"sandbox allow-scripts; default-src 'unsafe-inline'; img-src * data:\""
-
 node {
 	checkout scm
     def gitDocker = docker.build("custom-withgit:0.5")
@@ -16,6 +13,11 @@ node {
             }
 
             stage('Performance Test') {
+
+                when {
+                    branch 'xxx'
+                }
+
                 sh 'node lightHouseTestServer &'
                 sh 'npm run lighthouse'
 
