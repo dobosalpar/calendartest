@@ -6,50 +6,51 @@ node {
     def branch = env.BRANCH_NAME
     try {
         gitDocker.withRun('-p 9000:9000') {
-
-            stage('Build') { 
-                sh 'rm -rf node_modules'
-                sh 'npm install'
-                sh 'npm run build'
-            }
-
-            stage('Performance Test') {
-                echo 'STARTED'
-                if (branch != 'master') {
-                    return
-                }
-                echo 'I AM MASTER'
-                sh 'node lightHouseTestServer &'
-                sh 'npm run lighthouse'
-
-
-				def lightHouseReport = readJSON(file:'lighthouse.report.json')
-                def reportCategories = lightHouseReport['categories']
-
-                def minPerformanceRequirement = 0.1
-
-                def accessibilityScore = reportCategories['accessibility']['score']
-                def performanceScore = reportCategories['performance']['score']
-                def bestPracticesScore = reportCategories['best-practices']['score']
-                def seoScore = reportCategories['seo']['score']
-
-                if (performanceScore < minPerformanceRequirement || accessibilityScore < minPerformanceRequirement || bestPracticesScore < minPerformanceRequirement || seoScore < minPerformanceRequirement) {
-                    throw new Exception('Performance test failed!')
+            gitDocker.inside {
+                stage('Build') { 
+                    sh 'rm -rf node_modules'
+                    sh 'npm install'
+                    sh 'npm run build'
                 }
 
-                publishHTML (target: [
-                  allowMissing: false,
-                  alwaysLinkToLastBuild: false,
-                  keepAll: true,
-                  reportDir: '.',
-                  reportFiles: 'lighthouse.report.html',
-                  reportName: "Lighthouse"
-                ])
-            }
+                stage('Performance Test') {
+                    echo 'STARTED'
+                    if (branch != 'master') {
+                        return
+                    }
+                    echo 'I AM MASTER'
+                    sh 'node lightHouseTestServer &'
+                    sh 'npm run lighthouse'
 
-            stage("Notify success build") {
-                echo 'Succes'
-			}
+
+                    def lightHouseReport = readJSON(file:'lighthouse.report.json')
+                    def reportCategories = lightHouseReport['categories']
+
+                    def minPerformanceRequirement = 0.1
+
+                    def accessibilityScore = reportCategories['accessibility']['score']
+                    def performanceScore = reportCategories['performance']['score']
+                    def bestPracticesScore = reportCategories['best-practices']['score']
+                    def seoScore = reportCategories['seo']['score']
+
+                    if (performanceScore < minPerformanceRequirement || accessibilityScore < minPerformanceRequirement || bestPracticesScore < minPerformanceRequirement || seoScore < minPerformanceRequirement) {
+                        throw new Exception('Performance test failed!')
+                    }
+
+                    publishHTML (target: [
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: false,
+                    keepAll: true,
+                    reportDir: '.',
+                    reportFiles: 'lighthouse.report.html',
+                    reportName: "Lighthouse"
+                    ])
+                }
+
+                stage("Notify success build") {
+                    echo 'Succes'
+                }
+            }
         }
 
         stage('Clean workspace') {
