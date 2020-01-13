@@ -5,7 +5,7 @@ node {
     def gitDocker = docker.build("custom-withgit:0.5")
     def branch = env.BRANCH_NAME
     try {
-        gitDocker.inside {
+        gitDocker.withRun('-p 9000:9000') {
 
             stage('Build') { 
                 sh 'rm -rf node_modules'
