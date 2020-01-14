@@ -19,7 +19,7 @@ node {
                         return
                     }
                     echo 'I AM MASTER'
-                    sh 'node lightHouseTestServer &'
+                    sh 'node lightHouseTestServer'
                     sh 'npm run lighthouse'
 
 
