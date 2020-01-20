@@ -33,6 +33,11 @@ node {
                     def bestPracticesScore = reportCategories['best-practices']['score']
                     def seoScore = reportCategories['seo']['score']
 
+                    echo accessibilityScore.toString()
+                    echo performanceScore.toString()
+                    echo bestPracticesScore.toString()
+                    echo seoScore.toString()
+
                     if (performanceScore < minPerformanceRequirement || accessibilityScore < minPerformanceRequirement || bestPracticesScore < minPerformanceRequirement || seoScore < minPerformanceRequirement) {
                         throw new Exception('Performance test failed!')
                     }
