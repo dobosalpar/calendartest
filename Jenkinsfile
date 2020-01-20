@@ -23,7 +23,7 @@ node {
                     sh 'npm run lighthouse'
 
 
-                    def lightHouseReport = readJSON(file:'lighthouse.reportxx.json')
+                    def lightHouseReport = readJSON(file:'lighthouse.report.json')
                     def reportCategories = lightHouseReport['categories']
 
                     def minPerformanceRequirement = 0.1
